@@ -47,7 +47,10 @@ class AIProvider(ABC):
         self, messages: List[AIMessage], **kwargs: Any
     ) -> AsyncGenerator[str, None]:
         """Stream a response from the AI model."""
-        pass
+        # This construct satisfies type checkers that this is an async generator
+        # without adding any runtime overhead, resolving the override error.
+        if False:
+            yield
 
     @abstractmethod
     def validate_config(self) -> bool:
