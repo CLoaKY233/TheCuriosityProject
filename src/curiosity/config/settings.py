@@ -19,12 +19,8 @@ class DatabaseSettings(BaseSettings):
         description="SurrealDB connection URL",
     )
     username: str = Field(default="cloaky", description="Database username")
-    password: Optional[SecretStr] = Field(
-        default=None, description="Database password"
-    )
-    namespace: str = Field(
-        default="curiosity", description="Database namespace"
-    )
+    password: Optional[SecretStr] = Field(default=None, description="Database password")
+    namespace: str = Field(default="curiosity", description="Database namespace")
     database: str = Field(default="curiosity", description="Database name")
 
     @model_validator(mode="after")
@@ -57,9 +53,7 @@ class AISettings(BaseSettings):
         default="https://models.github.ai/inference",
         description="GitHub Models endpoint",
     )
-    azure_endpoint: Optional[str] = Field(
-        default=None, description="Azure AI endpoint"
-    )
+    azure_endpoint: Optional[str] = Field(default=None, description="Azure AI endpoint")
 
     @model_validator(mode="after")
     def validate_api_key(self):
@@ -80,9 +74,7 @@ class AppSettings(BaseSettings):
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = Field(
         default="INFO", description="Logging level"
     )
-    database: DatabaseSettings = Field(
-        default_factory=lambda: DatabaseSettings()
-    )
+    database: DatabaseSettings = Field(default_factory=lambda: DatabaseSettings())
     ai: AISettings = Field(default_factory=lambda: AISettings())
 
 
